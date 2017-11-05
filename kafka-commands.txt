@@ -1,0 +1,35 @@
+C:\kafka_2.10-0.10.1.1\bin\windows>zookeeper-server-start.bat C:/kafka_2.10-0.10.1.1/config/zookeeper.properties
+
+C:\kafka_2.10-0.10.1.1\bin\windows>kafka-server-start.bat C:/kafka_2.10-0.10.1.1/config/server.properties
+
+C:\kafka_2.10-0.10.1.1\bin\windows>kafka-console-producer.bat --broker-list localhost:9092 --topic hello-topic
+
+C:\kafka_2.10-0.10.1.1\bin\windows>kafka-console-consumer.bat --zookeeper localhost:2181 -topic hello-topic -from-beginning
+
+
+
+KAFKA - DESCERIBE :
+
+kafka-topics.bat --describe --zookeeper localhost:2181 --topic hello-topic
+
+KAFKA - CREATE :
+
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+
+
+KAFKA - API - JAVA :
+
+https://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html
+
+EXAMPLES :
+
+https://stackoverflow.com/questions/46047649/how-to-get-last-5-days-messages-from-kafka-using-java
+
+https://www.programcreek.com/java-api-examples/index.php?api=kafka.api.PartitionOffsetRequestInfo
+
+
+Good - Sample Program Methods :
+
+https://github.com/vert-x3/vertx-kafka-client/blob/master/src/main/java/examples/VertxKafkaClientExamples.java
+
+[(timestamp=1509898370635, offset=34)]
