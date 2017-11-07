@@ -33,3 +33,43 @@ Good - Sample Program Methods :
 https://github.com/vert-x3/vertx-kafka-client/blob/master/src/main/java/examples/VertxKafkaClientExamples.java
 
 [(timestamp=1509898370635, offset=34)]
+
+
+
+
+
+
+
+
+
+boolean flag = true;
+
+while (true) {
+    ConsumerRecords<String, String> records = consumer.poll(100);
+
+    if(flag) {
+        Map<TopicPartition, Long> query = new HashMap<>();
+        query.put(
+                new TopicPartition("simple-topic-1", 0),
+                Instant.now().minus(10, MINUTES).toEpochMilli());
+
+        Map<TopicPartition, OffsetAndTimestamp> result = consumer.offsetsForTimes(query);
+
+        result.entrySet()
+                .stream()
+                .forEach(entry -> consumer.seek(entry.getKey(), entry.getValue().offset()));
+
+        flag = false;
+    }
+
+    for (ConsumerRecord<String, String> record : records)
+        System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+}
+
+
+
+
+
+
+
+https://stackoverflow.com/a/46929326/4067129
